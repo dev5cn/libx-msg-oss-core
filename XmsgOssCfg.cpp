@@ -108,6 +108,7 @@ shared_ptr<XscHttpCfg> XmsgOssCfg::pubXscHttpServerCfg()
 	httpCfg->tracing = this->cfgPb->pubhttp().tcp().tracing();
 	httpCfg->heartbeat = this->cfgPb->pubhttp().tcp().heartbeat();
 	httpCfg->n2hZombie = this->cfgPb->pubhttp().tcp().n2hzombie();
+	httpCfg->n2hTransTimeout = this->cfgPb->pubhttp().tcp().n2htranstimeout();
 	httpCfg->n2hTracing = this->cfgPb->pubhttp().tcp().n2htracing();
 	httpCfg->h2nReConn = this->cfgPb->pubhttp().tcp().h2nreconn();
 	httpCfg->h2nTransTimeout = this->cfgPb->pubhttp().tcp().h2ntranstimeout();
@@ -132,6 +133,7 @@ shared_ptr<XscTcpCfg> XmsgOssCfg::priXscTcpServerCfg()
 	tcpCfg->tracing = this->cfgPb->pritcp().tracing();
 	tcpCfg->heartbeat = this->cfgPb->pritcp().heartbeat();
 	tcpCfg->n2hZombie = this->cfgPb->pritcp().n2hzombie();
+	tcpCfg->n2hTransTimeout = this->cfgPb->pritcp().n2htranstimeout();
 	tcpCfg->n2hTracing = this->cfgPb->pritcp().n2htracing();
 	tcpCfg->h2nReConn = this->cfgPb->pritcp().h2nreconn();
 	tcpCfg->h2nTransTimeout = this->cfgPb->pritcp().h2ntranstimeout();
@@ -191,22 +193,22 @@ shared_ptr<XmsgOssCfgXscTcpServer> XmsgOssCfg::loadXscTcpCfg(XMLElement* node)
 {
 	if (node == NULL)
 		return nullptr;
-	shared_ptr<XmsgOssCfgXscTcpServer> tcpCfg(new XmsgOssCfgXscTcpServer());
-	tcpCfg->set_addr(Misc::strAtt(node, "addr"));
-	tcpCfg->set_worker(Misc::hexOrInt(node, "worker"));
-	tcpCfg->set_peerlimit(Misc::hexOrInt(node, "peerLimit"));
-	tcpCfg->set_peermtu(Misc::hexOrInt(node, "peerMtu"));
-	tcpCfg->set_peerrcvbuf(Misc::hexOrInt(node, "peerRcvBuf"));
-	tcpCfg->set_peersndbuf(Misc::hexOrInt(node, "peerSndBuf"));
-	tcpCfg->set_lazyclose(Misc::hexOrInt(node, "lazyClose"));
-	tcpCfg->set_tracing("true" == Misc::strAtt(node, "tracing"));
-	tcpCfg->set_heartbeat(Misc::hexOrInt(node, "heartbeat"));
-	tcpCfg->set_n2hzombie(Misc::hexOrInt(node, "n2hZombie"));
-	tcpCfg->set_n2htranstimeout(Misc::hexOrInt(node, "n2hTransTimeout"));
-	tcpCfg->set_n2htracing("true" == Misc::strAtt(node, "n2hTracing"));
-	tcpCfg->set_h2nreconn(Misc::hexOrInt(node, "h2nReConn"));
-	tcpCfg->set_h2ntranstimeout(Misc::hexOrInt(node, "h2nTransTimeout"));
-	return tcpCfg;
+	shared_ptr<XmsgOssCfgXscTcpServer> tcpServer(new XmsgOssCfgXscTcpServer());
+	tcpServer->set_addr(Misc::strAtt(node, "addr"));
+	tcpServer->set_worker(Misc::hexOrInt(node, "worker"));
+	tcpServer->set_peerlimit(Misc::hexOrInt(node, "peerLimit"));
+	tcpServer->set_peermtu(Misc::hexOrInt(node, "peerMtu"));
+	tcpServer->set_peerrcvbuf(Misc::hexOrInt(node, "peerRcvBuf"));
+	tcpServer->set_peersndbuf(Misc::hexOrInt(node, "peerSndBuf"));
+	tcpServer->set_lazyclose(Misc::hexOrInt(node, "lazyClose"));
+	tcpServer->set_tracing("true" == Misc::strAtt(node, "tracing"));
+	tcpServer->set_heartbeat(Misc::hexOrInt(node, "heartbeat"));
+	tcpServer->set_n2hzombie(Misc::hexOrInt(node, "n2hZombie"));
+	tcpServer->set_n2htranstimeout(Misc::hexOrInt(node, "n2hTransTimeout"));
+	tcpServer->set_n2htracing("true" == Misc::strAtt(node, "n2hTracing"));
+	tcpServer->set_h2nreconn(Misc::hexOrInt(node, "h2nReConn"));
+	tcpServer->set_h2ntranstimeout(Misc::hexOrInt(node, "h2nTransTimeout"));
+	return tcpServer;
 }
 
 shared_ptr<XmsgOssCfgXscHttpServer> XmsgOssCfg::loadXscHttpCfg(XMLElement* node)

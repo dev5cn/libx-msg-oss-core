@@ -25,7 +25,7 @@ XmsgOssHttpLog::XmsgOssHttpLog()
 
 }
 
-shared_ptr<XscHttpChannel> XmsgOssHttpLog::newXscHttpChannel(shared_ptr<XscHttpWorker> wk, int cfd, const string& peer)
+shared_ptr<XscHttpChannel> XmsgOssHttpLog::newXscHttpChannel(XscHttpWorker* wk, int cfd, const string& peer)
 {
 	return shared_ptr<XmsgOssHttpChannel>(new XmsgOssHttpChannel(wk, wk->mtu, cfd, peer));
 }

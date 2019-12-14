@@ -43,7 +43,7 @@ public:
 	bool sendRet(int ret, const string& desc); 
 	bool sendXmsgOssUploadSimpleRsp(shared_ptr<XmsgOssUploadSimpleRsp> rsp); 
 	string toString();
-	XmsgOssHttpChannel(shared_ptr<XscHttpWorker> wk, int mtu, int cfd, const string &peer);
+	XmsgOssHttpChannel(XscHttpWorker* wk, int mtu, int cfd, const string &peer);
 	virtual ~XmsgOssHttpChannel();
 public:
 	shared_ptr<XmsgOss4upload> upload; 

@@ -22,7 +22,7 @@
 #include "../up-down/XmsgOssTransmissionMgr.h"
 #include "../usr/XmsgClient.h"
 
-XmsgOssHttpChannel::XmsgOssHttpChannel(shared_ptr<XscHttpWorker> wk, int mtu, int cfd, const string &peer) :
+XmsgOssHttpChannel::XmsgOssHttpChannel(XscHttpWorker* wk, int mtu, int cfd, const string &peer) :
 		XscHttpChannel(wk, mtu, cfd, peer)
 {
 	this->cb = NULL;

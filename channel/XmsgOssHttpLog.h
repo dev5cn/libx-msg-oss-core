@@ -25,7 +25,7 @@
 class XmsgOssHttpLog: public XscHttpLog
 {
 public:
-	shared_ptr<XscHttpChannel> newXscHttpChannel(shared_ptr<XscHttpWorker> wk, int cfd, const string& peer); 
+	shared_ptr<XscHttpChannel> newXscHttpChannel(XscHttpWorker* wk, int cfd, const string& peer); 
 	void didaMainThread(ullong now); 
 	void dida(ullong now); 
 	void rx(XscChannel* channel, uchar* dat, int len); 
